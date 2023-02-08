@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { Asset } from "expo-asset";
-import { Map } from "./src/components/Map";
-import { Marker } from "./src/components/Marker";
+import MapView, { Marker } from "react-native-maps";
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -19,9 +18,22 @@ export default function App() {
   }
 
   return (
-    <Map>
-      <Marker coordinate={{ latitude: -33.8688, longitude: 151.2099 }} />
-    </Map>
+    <MapView
+      style={{ flex: 1 }}
+      initialCamera={{
+        center: { latitude: -33.8688, longitude: 151.2099 },
+        zoom: 3,
+        heading: 0,
+        pitch: 0,
+      }}
+      provider="google"
+    >
+      <Marker
+        coordinate={{ latitude: -33.8688, longitude: 151.2099 }}
+        icon={require("./src/assets/pin.png")}
+        anchor={{ x: 0.5, y: 0.5 }}
+      />
+    </MapView>
   );
 }
 
