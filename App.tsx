@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from "react";
+import { Image } from "react-native";
+import { Asset } from "expo-asset";
+import { Map } from "./src/components/Map";
+import { Marker } from "./src/components/Marker";
 
 export default function App() {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      await Promise.all([...cacheImages()]);
+      setIsReady(true);
+    })();
+  }, []);
+
+  if (!isReady) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Map>
+      <Marker coordinate={{ latitude: -33.8688, longitude: 151.2099 }} />
+    </Map>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+/**
+ *
+ * https://docs.expo.dev/archive/classic-updates/preloading-and-caching-assets/#pre-loading-and-caching-assets
+ */
+function cacheImages() {
+  return [require("./src/assets/pin.png")].map((image) => {
+    if (typeof image === "string") {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
+}
