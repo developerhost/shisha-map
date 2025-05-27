@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { Asset } from "expo-asset";
 import MapView, { Marker } from "react-native-maps";
+import { SHINJUKU_COORDINATE } from "./constants/location";
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -21,7 +22,7 @@ export default function App() {
     <MapView
       style={{ flex: 1 }}
       initialCamera={{
-        center: { latitude: -33.8688, longitude: 151.2099 },
+        center: SHINJUKU_COORDINATE,
         zoom: 3,
         heading: 0,
         pitch: 0,

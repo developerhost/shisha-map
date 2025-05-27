@@ -9,6 +9,7 @@ There is a difference in behaviour when the assets are being loaded locally comp
 1. Follow the steps [here](https://docs.expo.dev/versions/latest/sdk/map-view/#deploy-app-with-google-maps) to enter the google maps credentials
 2. `yarn install`
 3. `yarn ios`
+4. `npx expo start --tunnel --clear`← こっち普段を使っている
 
 ### Expected Result
 
