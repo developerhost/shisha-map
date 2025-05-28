@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:studio": "prisma studio",
+    "db:push": "prisma db push",
+    "db:seed": "prisma db seed",
+    "db:reset": "prisma migrate reset",
+    "d1:local": "wrangler d1 execute expo-maps-db --local --file=./prisma/migrations/$(ls -t prisma/migrations | head -1)/migration.sql",
+    "d1:remote": "wrangler d1 execute expo-maps-db --remote --file=./prisma/migrations/$(ls -t prisma/migrations | head -1)/migration.sql"
+  },
+  "dependencies": {
+    "@prisma/adapter-d1": "^6.8.2",
+    "@prisma/client": "^6.8.2",
+    "hono": "^4.7.10",
+    "prisma": "^6.8.2"
+  },
+  "devDependencies": {
+    "wrangler": "^4.4.0"
+  }
+}
